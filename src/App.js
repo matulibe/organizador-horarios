@@ -2,7 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { DndContext, closestCenter } from '@dnd-kit/core';
+import {SortableContext, VerticalListSortingStrategy, HorizontalListSortingStrategy, verticalListSortingStrategy} from '@dnd-kit/sortable';
 import './App.css';
+import Actividad from './Actividad'
+import { act } from 'react-dom/test-utils';
 
 //Las actividades a crear seran widgets. Por lo tanto ademas de implementarlos, la planilla debera ser
 // un mapa de widgets. 
@@ -65,6 +68,15 @@ function App() {
   return (
     <DndContext collisionDetection={closestCenter} onDragEnd={e=>dragginOver(e)}>
       <h1>Organizador de Horarios</h1>
+
+      <SortableContext items={actividades} strategy={verticalListSortingStrategy}>
+        {
+          actividades.map((actividad) => (
+            <Actividad actividad={actividad} />
+          ))
+        }
+      </SortableContext>
+
     </DndContext>
   );
 }
