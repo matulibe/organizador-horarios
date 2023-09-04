@@ -64,7 +64,7 @@ function App() {
 
   return (
     <DndContext collisionDetection={closestCenter} onDragEnd={e=>dragginOver(e)}>
-
+      <h1>Organizador de Horarios</h1>
     </DndContext>
   );
 }
