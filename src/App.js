@@ -1,11 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { DndContext, closestCenter } from '@dnd-kit/core';
-import {SortableContext, VerticalListSortingStrategy, HorizontalListSortingStrategy, verticalListSortingStrategy} from '@dnd-kit/sortable';
+import {SortableContext, verticalListSortingStrategy, arrayMove} from '@dnd-kit/sortable';
 import './App.css';
 import Actividad from './Actividad'
-import { act } from 'react-dom/test-utils';
 
 //Las actividades a crear seran widgets. Por lo tanto ademas de implementarlos, la planilla debera ser
 // un mapa de widgets. 
@@ -18,61 +16,34 @@ import { act } from 'react-dom/test-utils';
 function App() {
 
   const [actividades, setActividades] = useState([
-    {
-      id: 0,
-      titulo: 1,
-      list: "lunes"
-    },
-    {
-      id: 1,
-      titulo: 2,
-      list: "lunes"
-    },
-    {
-      id: 2,
-      titulo: 3,
-      list: "lunes"
-    },
-    {
-      id: 3,
-      titulo: 4,
-      list: "lunes"
-    }
+    { id: 1, titulo: "Proba" },
+    { id: 2, titulo: "Boxeo" },
+    { id: 3, titulo: "Apollo" },
   ]);
 
-  const getList = (list) => {
-    return actividades.filter(item => item.list === list)
-  }
+  const handleDragEnd = (e) => {
+    // A tener en cuenta a futuro
+    // onDragEnd recibe parametros active y over, 
+    // Estos nombres *NO* se pueden modificar
+    const {active, over} = e;
 
-  const startDrag = (e, item) => {
-    e.dataTransfer.setData('itemId', item.id);
-  }
-
-  const dragginOver = (e) => {
-    e.preventDefault();
-  }
-
-  const onDrop = (e, list) => {
-    const itemId = e.dataTransfer.getData('itemId');
-    const item = actividades.find(item => item.id === itemId);
-    item.list = list;
-
-    const newState = actividades.map(actividad => {
-      if (actividad.id === itemId) return item;
-      return actividad
-    });
-
-    setActividades(newState);
+    if (!active.id !== over.id) {
+      setActividades((actividades) => {
+        const oldIndex = actividades.findIndex((actividad) => actividad.id === active.id);
+        const newIndex = actividades.findIndex((actividad) => actividad.id === over.id);
+        return arrayMove(actividades, oldIndex, newIndex);
+      });
+    }
   }
 
   return (
-    <DndContext collisionDetection={closestCenter} onDragEnd={e=>dragginOver(e)}>
+    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <h1>Organizador de Horarios</h1>
 
       <SortableContext items={actividades} strategy={verticalListSortingStrategy}>
         {
           actividades.map((actividad) => (
-            <Actividad actividad={actividad} />
+            <Actividad key={actividad.id} actividad={actividad}  />
           ))
         }
       </SortableContext>
