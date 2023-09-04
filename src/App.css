@@ -1,0 +1,33 @@
+.planilla {
+  display: flex;
+  flex-direction: column;
+  background-color: #F6F8FC;
+  width: 400px;
+  min-height: 100px;
+  padding: 24px 12px;
+  border-radius: 8px;
+  border-top: 7px solid;
+  box-shadow: 0 8px 16px rgba(#333, 0.1);
+}
+
+.dia {
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  height: 80%;
+}
+
+.title {
+  align-items: center;
+}
+
+.columnas {
+  display: flex;
+  flex-direction: column;
+}
+
+.actividades {
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
