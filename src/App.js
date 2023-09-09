@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import {SortableContext, verticalListSortingStrategy, arrayMove} from '@dnd-kit/sortable';
 import './App.css';
-import Actividad from './Actividad'
+import Actividad from './components/Actividad'
 
 //Las actividades a crear seran widgets. Por lo tanto ademas de implementarlos, la planilla debera ser
 // un mapa de widgets. 
@@ -21,10 +21,15 @@ function App() {
     { id: 3, titulo: "Apollo" },
   ]);
 
+  const [dia, setDias] = useState([]);
+
   const handleDragEnd = (e) => {
-    // A tener en cuenta a futuro
-    // onDragEnd recibe parametros active y over, 
-    // Estos nombres *NO* se pueden modificar
+    /* A tener en cuenta a futuro
+     *
+     *onDragEnd recibe parametros active y over, 
+     *Estos nombres *NO* se pueden modificar
+     *
+     */
     const {active, over} = e;
 
     if (!active.id !== over.id) {
@@ -37,18 +42,18 @@ function App() {
   }
 
   return (
-    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <h1>Organizador de Horarios</h1>
+      <DndContext className="fondo" collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <h1>Organizador de Horarios</h1>
 
-      <SortableContext items={actividades} strategy={verticalListSortingStrategy}>
-        {
-          actividades.map((actividad) => (
-            <Actividad key={actividad.id} actividad={actividad}  />
-          ))
-        }
-      </SortableContext>
+        <SortableContext items={actividades} strategy={verticalListSortingStrategy}>
+          {
+            actividades.map((actividad) => (
+              <Actividad key={actividad.id} actividad={actividad}  />
+            ))
+          }
+        </SortableContext>
 
-    </DndContext>
+      </DndContext>
   );
 }
 
