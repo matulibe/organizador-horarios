@@ -25,7 +25,7 @@ function App() {
     {
       id: 1,
       titulo: 'Actividades',
-      actividades: [{ id: 1, titulo: "Proba", diaID: 2 }]
+      actividades: [{ id: 1, titulo: "Proba", diaID: 1 }, { id: 2, titulo: "Boxeo", diaID: 1 }]
     },
     {
       id: 2,

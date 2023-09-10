@@ -4,8 +4,9 @@
     width: 150px;
     margin-right: 20px;
     text-align: center;
-    border-color: black;
-    border-width: 2px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: relative;
 }
 
 .dia-titulo{

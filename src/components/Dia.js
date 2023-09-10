@@ -29,7 +29,9 @@ function Dia({ dia, actividades, sumarActividad }) {
          *Estos nombres *NO* se pueden modificar
          *
          */
-        const { active, over, source } = e;
+        const { active, over} = e;
+
+
 
         if (!over || !active) {
             return;
@@ -38,16 +40,16 @@ function Dia({ dia, actividades, sumarActividad }) {
         const actividad = actividades.find((actividad) => actividad.id === active.id);
 
         if (actividad) {
+            console.log(actividad.titulo)
             if (dia.id === over.id) {
                 const oldIndex = actividades.findIndex((act) => act.id === active.id);
                 const newIndex = actividades.findIndex((act) => act.id === over.id);
                 if (oldIndex !== newIndex) {
                     const nuevasActividades = arrayMove(actividades, oldIndex, newIndex);
-                    sumarActividad(nuevasActividades);
                 }
             }
             else {
-                sumarActividad(actividades.filter((act) => act.id !== actividad.id), actividad, over.id);
+                sumarActividad(actividad, over.id);
             }
         }
     };
