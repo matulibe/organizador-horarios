@@ -1,0 +1,11 @@
+.dia-container {
+    display: inline-block;
+    vertical-align: top;
+    width: 150px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.dia-titulo{
+    text-align: center;
+}

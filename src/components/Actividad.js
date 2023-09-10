@@ -1,5 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable"
 import {CSS} from "@dnd-kit/utilities"
+import {Draggable} from "react-beautiful-dnd"
 
 
 function Actividad({actividad}){

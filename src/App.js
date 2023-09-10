@@ -18,20 +18,52 @@ function App() {
 
   const [dias, setDias] = useState([
     {
+      id: 0,
+      titulo: 'Horas'
+    },
+    {
       id: 1,
-      titulo: 'lunes'
+      titulo: 'Actividades'
+    },
+    {
+      id: 2,
+      titulo: 'Lunes'
+    },
+    {
+      id: 3,
+      titulo: 'Martes'
+    },
+    {
+      id: 4,
+      titulo: 'Miercoles'
+    },
+    {
+      id: 5,
+      titulo: 'Jueves'
+    },
+    {
+      id: 6,
+      titulo: 'Viernes'
+    },
+    {
+      id: 7,
+      titulo: 'Sabado'
+    },
+    {
+      id: 9,
+      titulo: 'Domingo'
     }
   ]);
 
   return (
     <div>
         <h1>Organizador de Horarios</h1>
-      <SortableContext items={dias} strategy={horizontalListSortingStrategy}>
-        {
-          dias.map((dia) => (
+      <SortableContext items={dias} strategy={verticalListSortingStrategy}>
+        <div className="column-container">
+          {dias.map((dia) => (
             <Dia key={dia.id} dia={dia} />
-          ))
-        }
+          ))}
+        </div>
       </SortableContext>
     </div>
   );

@@ -3,7 +3,9 @@ import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import { useState } from 'react';
 import { DndContext, closestCenter } from '@dnd-kit/core';
-import { SortableContext, verticalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
+import { Droppable } from 'react-beautiful-dnd';
+import { SortableContext, verticalListSortingStrategy, arrayMove, a } from '@dnd-kit/sortable';
+import './Dia.css'
 import Actividad from './Actividad'
 
 
@@ -15,9 +17,9 @@ function Dia({ dia }) {
     }
 
     const [actividades, setActividades] = useState([
-        { id: 1, titulo: "Proba" },
-        { id: 2, titulo: "Boxeo" },
-        { id: 3, titulo: "Apollo" },
+        { id: 1, titulo: "Proba", diaID: 2 },
+        { id: 2, titulo: "Boxeo", diaID: 6 },
+        { id: 3, titulo: "Apollo", diaID: 4 },
     ]);
 
     const handleDragEnd = (e) => {
@@ -27,7 +29,7 @@ function Dia({ dia }) {
          *Estos nombres *NO* se pueden modificar
          *
          */
-        const { active, over } = e;
+        const { active, over, destination, source } = e;
 
         if (!active.id !== over.id) {
             setActividades((actividades) => {
@@ -39,18 +41,18 @@ function Dia({ dia }) {
     }
     
     return (
-        <div style={style} ref={setNodeRef} {...attributes} {...listeners}>
+        <div className="dia-container" style={style} ref={setNodeRef} {...attributes} {...listeners}>
+            <h2 className='dia-titulo'>{dia.titulo}</h2>
             <DndContext className="fondo" collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                 <SortableContext items={actividades} strategy={verticalListSortingStrategy}>
-                    {
-                        actividades.map((actividad) => (
-                            <Actividad key={actividad.id} actividad={actividad} />
-                        ))
-                    }
+                    {actividades.map((actividad) => {
+                        if(dia.id === actividad.diaID){
+                            return <Actividad key={actividad.id} actividad={actividad} />}
+                    })}
                 </SortableContext>
             </DndContext>
         </div>
-    )
+    );
 }
 
 export default Dia
