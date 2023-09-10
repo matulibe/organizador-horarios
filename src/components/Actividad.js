@@ -1,19 +1,18 @@
-import { useSortable } from "@dnd-kit/sortable"
-import {CSS} from "@dnd-kit/utilities"
-import {Draggable} from "react-beautiful-dnd"
+import React from "react";
+import { Draggable } from "react-beautiful-dnd";
+import { act } from "react-dom/test-utils";
 
-
-function Actividad({actividad}){
-   const {attributes, listeners, setNodeRef, transform, transition} = useSortable({id: actividad.id})
-   const style = {
-    transform: CSS.Transform.toString(transform),
-    transition
-   }
-    return (
-        <div style={style} ref={setNodeRef} {...attributes} {...listeners}>
-            <h2>{actividad.titulo}</h2>
-        </div>
-    )
+export default function Actividad({actividad, indice}){
+    return(
+        <Draggable draggableId={`${actividad.id}`} key={actividad.id} index={indice}>
+            {(provided, snapshot) => {
+                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} isDragging={snapshot.isDragging}>
+                    <div>
+                        <h3>{actividad.nombre}</h3>
+                    </div>
+                    {provided.placeholder}
+                </div>
+            }}
+        </Draggable>
+    );
 }
-
-export default Actividad
