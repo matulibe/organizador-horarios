@@ -19,41 +19,63 @@ function App() {
   const [dias, setDias] = useState([
     {
       id: 0,
-      titulo: 'Horas'
+      titulo: 'Horas',
+      actividades:[]
     },
     {
       id: 1,
-      titulo: 'Actividades'
+      titulo: 'Actividades',
+      actividades: [{ id: 1, titulo: "Proba", diaID: 2 }]
     },
     {
       id: 2,
-      titulo: 'Lunes'
+      titulo: 'Lunes',
+      actividades:[]
     },
     {
       id: 3,
-      titulo: 'Martes'
+      titulo: 'Martes',
+      actividades:[]
     },
     {
       id: 4,
-      titulo: 'Miercoles'
+      titulo: 'Miercoles',
+      actividades:[]
     },
     {
       id: 5,
-      titulo: 'Jueves'
+      titulo: 'Jueves',
+      actividades:[]
     },
     {
       id: 6,
-      titulo: 'Viernes'
+      titulo: 'Viernes',
+      actividades:[]
     },
     {
       id: 7,
-      titulo: 'Sabado'
+      titulo: 'Sabado',
+      actividades:[]
     },
     {
       id: 9,
-      titulo: 'Domingo'
+      titulo: 'Domingo',
+      actividades:[]
     }
   ]);
+
+  const sumarActividad = (actividad, diaID) => {
+    setDias((dias) => {
+      const diasNuevos = [...dias];
+      const indice = diasNuevos.findIndex((dia) => dia.id === diaID);
+
+      if (indice !== -1) {
+        diasNuevos[indice].actividades.push(actividad);
+      }
+
+      return diasNuevos;
+    });
+  };
 
   return (
     <div>
@@ -61,7 +83,7 @@ function App() {
       <SortableContext items={dias} strategy={verticalListSortingStrategy}>
         <div className="column-container">
           {dias.map((dia) => (
-            <Dia key={dia.id} dia={dia} />
+            <Dia key={dia.id} dia={dia} actividades={dia.actividades} sumarActividad={sumarActividad} />
           ))}
         </div>
       </SortableContext>
