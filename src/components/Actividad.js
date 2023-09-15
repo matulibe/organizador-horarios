@@ -1,18 +1,18 @@
 import React from "react";
-import { Draggable } from "react-beautiful-dnd";
-import { act } from "react-dom/test-utils";
+import { Draggable } from "react-beautiful-dnd"; 
+import "./Actividad.css"
 
-export default function Actividad({actividad, indice}){
-    return(
-        <Draggable draggableId={`${actividad.id}`} key={actividad.id} index={indice}>
-            {(provided, snapshot) => {
-                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} isDragging={snapshot.isDragging}>
-                    <div>
+export default function Actividad({ actividad, index }) {
+    return (
+        <Draggable draggableId={actividad.id.toString()} index={index} key={actividad.id}>
+            {(provided) => (
+                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                    <div className="actividad">
                         <h3>{actividad.nombre}</h3>
                     </div>
                     {provided.placeholder}
                 </div>
-            }}
+            )}
         </Draggable>
     );
 }

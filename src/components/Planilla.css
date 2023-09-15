@@ -1,0 +1,13 @@
+.Dias{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.Dia{
+    width: calc(11%);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: grey;
+}
