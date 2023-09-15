@@ -19,34 +19,34 @@ export default function Planilla() {
     ]);
     const [actMie, setActMie] = useState([
         {
-            nombre: 'Boxeo',
-            id: "1"
+            nombre: 'Orga',
+            id: "3"
         }
     ]);
 
     const [actJu, setActJu] = useState([
         {
-            nombre: 'Proba',
-            id: "2"
+            nombre: 'Tenis',
+            id: "4"
         }
     ]);
     const [actVie, setActVie] = useState([
         {
-            nombre: 'Boxeo',
-            id: "1"
+            nombre: 'ArqSoft',
+            id: "5"
         }
     ]);
 
     const [actSab, setActSab] = useState([
         {
-            nombre: 'Proba',
-            id: "2"
+            nombre: 'Cocina',
+            id: "6"
         }
     ]);
     const [actDom, setActDom] = useState([
         {
-            nombre: 'Boxeo',
-            id: "1"
+            nombre: 'Programar',
+            id: "7"
         }
     ]);
 
@@ -69,7 +69,9 @@ export default function Planilla() {
 
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
-            <h1>Organizacion de Horarios</h1>
+            <div className="titulo">
+                <h1>Organizacion de Horarios</h1>
+            </div>
             <div className="Dias">
                 <div className="Dia">
                     <Dia nombre={"Lunes"} actividades={actLun} id={"lunes"} />

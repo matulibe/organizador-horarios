@@ -11,3 +11,12 @@
     border-radius: 10px;
     background-color: grey;
 }
+
+.titulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(198, 235, 242);
+    text-decoration: underline;
+
+}
