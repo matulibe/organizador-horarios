@@ -50,13 +50,21 @@ export default function Planilla() {
         }
     ]);
 
-
+    /*
+     *
+     *  Funcion destinada a cambiar de lugar los horarios
+     *  Tomara los datos que tienen son el id del arrastrable,
+     *  la fila de destino y la de partida.
+     *  Chequeara cada caso posible y hara el analisis necesario
+     * 
+     *  **Nota: esto puede ser mejorado y se lo esta trabajando**.
+     * 
+     */
     const handleDragEnd = (e) => {
         const { destination, source, draggableId } = e;
         if (source.droppableId === destination.droppableId){
             return;
-        } 
-        if (source.droppableId === "martes") {
+        }  if (source.droppableId === "martes") {
             var draggedActivity = actMar.find((act) => act.id === draggableId);
             setActMar((prevMar) => prevMar.filter((act) => act.id !== draggableId));
             setActMar((prevMar) => [...prevMar, draggedActivity]);
