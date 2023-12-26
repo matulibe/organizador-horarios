@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import Dia from "./Dia";
+import PopupCrear from "./PopupCrear.js"
 import {dias, actividades as actividadesIniciales} from "./DataActividades"
 import "./Planilla.css"
 
 export default function Planilla() {
 
     const [actividades, setActividades] = useState(actividadesIniciales);
-
+    const [popup, setPopup] = useState(false);
 
     /*
      *
@@ -69,6 +70,13 @@ export default function Planilla() {
                         <Dia nombre={columna.dia} actividades={columna.actividades} id={columna.id} />
                     </div>
                 ))}
+            </div>
+            <br></br>
+            <div>
+                <button className="boton" onClick={()=> setPopup(true)}>Crear</button>
+                <PopupCrear trigger={popup}>
+                </PopupCrear>
+                <button className="boton">Guardar</button>
             </div>
         </DragDropContext>
     );
