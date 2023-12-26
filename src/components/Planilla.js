@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import Dia from "./Dia";
-import {dias, actividades} from "./DataActividades"
+import {dias, actividades as actividadesIniciales} from "./DataActividades"
 import "./Planilla.css"
 
 export default function Planilla() {
+
+    const [actividades, setActividades] = useState(actividadesIniciales);
+
+
     /*
      *
      *  Funcion destinada a cambiar de lugar los horarios
@@ -15,26 +19,38 @@ export default function Planilla() {
      *  **Nota: esto puede ser mejorado y se lo esta trabajando**.
      * 
      */
-    // const handleDragEnd = (e) => {
-    //     const { destination, source, draggableId } = e;
-    //     if (source.droppableId === destination.droppableId){
-    //         return;
-    //     }  
+    const handleDragEnd = (e) => {
+        const { destination, source, draggableId } = e;
+
+        // Check if there's no valid destination
+        if (!destination) {
+            return;
+        }
+
+        if(destination.droppableId === source.droppableId){
+            return;
+        }
+
+        const updatedActivities = [...actividades];
+
+        const draggedActivity = updatedActivities.find((activity) => activity.id === draggableId);
+
+        const str = destination.droppableId;
+        console.log(draggedActivity);
+        draggedActivity.dia = str[0].toUpperCase() + str.slice(1);
+        console.log(draggedActivity);
+
+        updatedActivities.splice(source.index, 1);
+
+        updatedActivities.splice(destination.index, 0, draggedActivity);
+
         
-        
-    //     if (source.droppableId === "martes") {
-    //         var draggedActivity = actMar.find((act) => act.id === draggableId);
-    //         setActMar((prevMar) => prevMar.filter((act) => act.id !== draggableId));
-    //         setActMar((prevMar) => [...prevMar, draggedActivity]);
-    //     } else {
-    //         draggedActivity = actLun.find((act) => act.id === draggableId);
-    //         setActLun((prevLun) => prevLun.filter((act) => act.id !== draggableId));
-    //         setActLun((prevLun) => [...prevLun, draggedActivity]);
-    //     }
-    // }
+        //Actualizo
+        setActividades(updatedActivities);
+    };
 
     const columnas = dias.map((dia)=>{
-        const actividadEnDia = actividades.filter((actividad)=> actividad.dia == dia)
+        const actividadEnDia = actividadesIniciales.filter((actividad)=> actividad.dia === dia)
         return{
             dia,
             id: dia.toLowerCase(),

@@ -35,5 +35,10 @@ export const actividades = [
         nombre: 'Programar',
         dia: 'Domingo',
         id: "7"
+    },
+    {
+        nombre: 'Muaythai',
+        dia: 'Lunes',
+        id: "8"
     }
 ]
