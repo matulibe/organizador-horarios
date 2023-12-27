@@ -23,7 +23,6 @@ export default function Planilla() {
     const handleDragEnd = (e) => {
         const { destination, source, draggableId } = e;
 
-        // Check if there's no valid destination
         if (!destination) {
             return;
         }
@@ -32,22 +31,19 @@ export default function Planilla() {
             return;
         }
 
-        const updatedActivities = [...actividades];
+        const actividadesActualizadas = [...actividades];
 
-        const draggedActivity = updatedActivities.find((activity) => activity.id === draggableId);
+        const actMovida = actividadesActualizadas.find((act) => act.id === draggableId);
 
         const str = destination.droppableId;
-        console.log(draggedActivity);
-        draggedActivity.dia = str[0].toUpperCase() + str.slice(1);
-        console.log(draggedActivity);
+        actMovida.dia = str[0].toUpperCase() + str.slice(1);
+        actividadesActualizadas.splice(source.index, 1);
 
-        updatedActivities.splice(source.index, 1);
-
-        updatedActivities.splice(destination.index, 0, draggedActivity);
+        actividadesActualizadas.splice(destination.index, 0, actMovida);
 
         
         //Actualizo
-        setActividades(updatedActivities);
+        setActividades(actividadesActualizadas);
     };
 
     const columnas = dias.map((dia)=>{
@@ -60,24 +56,28 @@ export default function Planilla() {
     })
 
     return (
-        <DragDropContext onDragEnd={handleDragEnd}>
-            <div className="titulo">
-                <h1>Organizacion de Horarios</h1>
-            </div>
-            <div className="Dias">
-                {columnas.map((columna)=>(
-                    <div className="Dia">
-                        <Dia nombre={columna.dia} actividades={columna.actividades} id={columna.id} />
+        <div>
+            <main>
+                <DragDropContext onDragEnd={handleDragEnd}>
+                    <div className="titulo">
+                        <h1>Organizacion de Horarios</h1>
                     </div>
-                ))}
-            </div>
-            <br></br>
-            <div>
-                <button className="boton" onClick={()=> setPopup(true)}>Crear</button>
-                <PopupCrear trigger={popup}>
+                    <div className="Dias">
+                        {columnas.map((columna)=>(
+                            <div className="Dia">
+                                <Dia nombre={columna.dia} actividades={columna.actividades} id={columna.id} />
+                            </div>
+                        ))}
+                    </div>
+                </DragDropContext>
+                <br></br>
+                <div className="botonera">
+                    <button className="boton" onClick={()=> setPopup(true)}>Crear</button>
+                    <button className="boton">Guardar</button>
+                </div>
+            </main>
+                <PopupCrear trigger={popup} setTrigger={setPopup}>
                 </PopupCrear>
-                <button className="boton">Guardar</button>
-            </div>
-        </DragDropContext>
+        </div>
     );
 }

@@ -25,5 +25,11 @@
     width: calc(11%);
     border: 1px solid #ccc;
     border-radius: 10px;
-    background-color: grey;
+    background-color: rgb(193, 185, 185);
+}
+
+.botonera{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
