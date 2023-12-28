@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './PopupCrear.css'
+import DropdownMenu from './DropdownMenu.js'
 
 function PopupCrear(props){
     const [nombre, setNombre]=useState('');
@@ -10,6 +11,7 @@ function PopupCrear(props){
                 <div className='seteoActividad'>
                     <h1>Actividad:</h1>
                     <input type='text' value={nombre} onChange={(e) => setNombre(e.target.nombre)} />
+                    <DropdownMenu />
                 </div>
             </div>
         </div>
