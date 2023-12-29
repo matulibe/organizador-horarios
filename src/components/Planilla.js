@@ -17,8 +17,6 @@ export default function Planilla() {
      *  la fila de destino y la de origen.
      *  Chequeara cada caso posible y hara el analisis necesario
      * 
-     *  **Nota: esto puede ser mejorado y se lo esta trabajando**.
-     * 
      */
     const handleDragEnd = (e) => {
         const { destination, source, draggableId } = e;
@@ -58,10 +56,10 @@ export default function Planilla() {
     return (
         <div>
             <main>
+                <div className="titulo">
+                    <h1>Organizacion de Horarios</h1>
+                </div>
                 <DragDropContext onDragEnd={handleDragEnd}>
-                    <div className="titulo">
-                        <h1>Organizacion de Horarios</h1>
-                    </div>
                     <div className="Dias">
                         {columnas.map((columna)=>(
                             <div className="Dia">
