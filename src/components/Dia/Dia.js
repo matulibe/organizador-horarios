@@ -1,6 +1,6 @@
 import React from "react";
 import {Droppable} from "react-beautiful-dnd";
-import Actividad from "./Actividad";
+import Actividad from "../Actividad/Actividad";
 
 export default function Dia({ nombre, actividades, id }) {
 

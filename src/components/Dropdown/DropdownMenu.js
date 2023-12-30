@@ -1,6 +1,6 @@
 import React from 'react'
 import './DropdownMenu.css'
-import { dias } from './DataActividades';
+import { dias } from '../DataActividades';
 
 function DropdownMenu(props) {
     const opciones = [...dias];

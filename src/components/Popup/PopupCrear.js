@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './PopupCrear.css'
-import DropdownMenu from './DropdownMenu.js'
-import SelectorHorarios from './SelectorHorarios.js';
+import DropdownMenu from '../Dropdown/DropdownMenu.js'
+import SelectorHorarios from '../SelectorHorarios/SelectorHorarios.js';
 
 function PopupCrear(props){
     const [nombre, setNombre]=useState('');

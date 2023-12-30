@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from 'uuid';
-import Dia from "./Dia";
-import PopupCrear from "./PopupCrear.js"
-import {dias, actividades as actividadesIniciales} from "./DataActividades"
+import Dia from "../Dia/Dia";
+import PopupCrear from "../Popup/PopupCrear.js"
+import {dias, actividades as actividadesIniciales} from "../DataActividades"
 import "./Planilla.css"
 
 export default function Planilla() {
