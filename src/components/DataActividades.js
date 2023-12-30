@@ -1,44 +1,46 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo']
 
 export const actividades = [
     {
         nombre: 'Boxeo',
         dia: 'Lunes',
-        id: "1"
+        id: uuidv4()
     },
     {
         nombre: 'Proba',
         dia: 'Martes',
-        id: "2"
+        id: uuidv4()
     },
     {
         nombre: 'Orga',
         dia: 'Miercoles',
-        id: "3"
+        id: uuidv4()
     },
     {
         nombre: 'Tenis',
         dia: 'Jueves',
-        id: "4"
+        id: uuidv4()
     },
     {
         nombre: 'ArqSoft',
         dia: 'Viernes',
-        id: "5"
+        id: uuidv4()
     },
     {
         nombre: 'Cocina',
         dia: 'Sabado',
-        id: "6"
+        id: uuidv4()
     },
     {
         nombre: 'Programar',
         dia: 'Domingo',
-        id: "7"
+        id: uuidv4()
     },
     {
         nombre: 'Muaythai',
         dia: 'Lunes',
-        id: "8"
+        id: uuidv4()
     }
 ]

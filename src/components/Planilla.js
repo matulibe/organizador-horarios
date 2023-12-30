@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
+import { v4 as uuidv4 } from 'uuid';
 import Dia from "./Dia";
 import PopupCrear from "./PopupCrear.js"
 import {dias, actividades as actividadesIniciales} from "./DataActividades"
@@ -15,7 +16,6 @@ export default function Planilla() {
      *  Funcion destinada a cambiar de lugar los horarios
      *  Tomara los datos que tienen son el id del arrastrable,
      *  la fila de destino y la de origen.
-     *  Chequeara cada caso posible y hara el analisis necesario
      * 
      */
     const handleDragEnd = (e) => {
@@ -25,27 +25,30 @@ export default function Planilla() {
             return;
         }
 
-        if(destination.droppableId === source.droppableId){
+        if (destination.droppableId === source.droppableId) {
             return;
         }
 
-        const actividadesActualizadas = [...actividades];
+        const actividadesAux = actividades.map((act) => ({ ...act }));
 
-        const actMovida = actividadesActualizadas.find((act) => act.id === draggableId);
+        const actMovida = actividadesAux.find((act) => act.id === draggableId);
 
         const str = destination.droppableId;
         actMovida.dia = str[0].toUpperCase() + str.slice(1);
-        actividadesActualizadas.splice(source.index, 1);
 
-        actividadesActualizadas.splice(destination.index, 0, actMovida);
+        const sinActAux = actividadesAux.filter((act) => act.id !== draggableId);
+        const actividadesActualizadas = [...sinActAux.slice(0, destination.index), actMovida, ...sinActAux.slice(destination.index)];
 
-        
-        //Actualizo
         setActividades(actividadesActualizadas);
     };
 
+
+    /* 
+     * Toma el vector de actividades y filtra las actividades por dia y las agrega al 
+     * vector del dia al cual pertenecen
+     */
     const columnas = dias.map((dia)=>{
-        const actividadEnDia = actividadesIniciales.filter((actividad)=> actividad.dia === dia)
+        const actividadEnDia = actividades.filter((actividad)=> actividad.dia === dia)
         return{
             dia,
             id: dia.toLowerCase(),
@@ -53,6 +56,24 @@ export default function Planilla() {
         }
     })
 
+    /*
+    * Recibe los parametros de la actividad a crear, crea dicha actividad y
+    * la agrega al vector
+    */
+    const agregarActividad = (nombre, dia) => {
+        const nuevaActividad = {
+            nombre: nombre,
+            dia: dia,
+            id: uuidv4()
+        };
+
+        const nuevoArray = [...actividades];
+        nuevoArray.push(nuevaActividad)
+
+        setActividades(nuevoArray);
+    };
+
+    console.log(actividades)
     return (
         <div>
             <main>
@@ -62,7 +83,7 @@ export default function Planilla() {
                 <DragDropContext onDragEnd={handleDragEnd}>
                     <div className="Dias">
                         {columnas.map((columna)=>(
-                            <div className="Dia">
+                            <div className="Dia" key={columna.id}>
                                 <Dia nombre={columna.dia} actividades={columna.actividades} id={columna.id} />
                             </div>
                         ))}
@@ -74,8 +95,7 @@ export default function Planilla() {
                     <button className="boton">Guardar</button>
                 </div>
             </main>
-                <PopupCrear trigger={popup} setTrigger={setPopup}>
-                </PopupCrear>
+                <PopupCrear trigger={popup} setTrigger={setPopup} agregarActividad={agregarActividad} />
         </div>
     );
 }
