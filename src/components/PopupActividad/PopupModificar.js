@@ -8,7 +8,12 @@ function PopupModificar(props) {
     const handleSave = () => {
         props.modificarActividad(nombre, props.actividadId);
 
-        setNombre('');
+        setNombre(''); // Vuelvo al estado inicial
+        props.setTrigger(false);
+    }
+
+    const handleDelete= () => {
+        props.borrarActividad(props.actividadId);
         props.setTrigger(false);
     }
 
@@ -24,6 +29,7 @@ function PopupModificar(props) {
                     <br />
                     <br />
                     <button className='botonGuardar' onClick={handleSave}>Finalizar</button>
+                    <button className='BotonEliminar' onClick={handleDelete}>Eliminar</button>
                 </div>
             </div>
         </div>

@@ -29,14 +29,12 @@ export default function Planilla() {
             return;
         }
 
-        const actividadesAux = actividades.map((act) => ({ ...act }));
-
-        const actMovida = actividadesAux.find((act) => act.id === draggableId);
+        const actMovida = actividades.find((act) => act.id === draggableId);
 
         const str = destination.droppableId;
         actMovida.dia = str[0].toUpperCase() + str.slice(1);
 
-        const sinActAux = actividadesAux.filter((act) => act.id !== draggableId);
+        const sinActAux = actividades.filter((act) => act.id !== draggableId);
         const actividadesActualizadas = [...sinActAux.slice(0, destination.index), actMovida, ...sinActAux.slice(destination.index)];
 
         setActividades(actividadesActualizadas);
@@ -73,6 +71,12 @@ export default function Planilla() {
         setActividades(nuevoArray);
     };
 
+    /*
+     * Recibe el nuevo nombre de la actividad y su id, elimina la actividad
+     * de actividades y crea una nueva actividad, la cual es insertada en 
+     * reemplazo.
+     */
+
     const modificarActividad = (nombre, id) =>{
         let index = actividades.findIndex(act => act.id === id);
         let diaAux = actividades.find((act) => act.id === id).dia;
@@ -89,6 +93,16 @@ export default function Planilla() {
         setActividades(actividadesActualizadas);
     }
 
+    /*
+     * Recibe un el id de la actividad que no se desea tener mas,
+     * y se la elimina del array actividades
+     */
+    const borrarActividad = (id) =>{
+        const actividadesActualizadas = actividades.filter((act) => act.id !== id);
+
+        setActividades(actividadesActualizadas)
+    }
+
     console.log(actividades)
     return (
         <div>
@@ -100,7 +114,7 @@ export default function Planilla() {
                     <div className="Dias">
                         {columnas.map((columna)=>(
                             <div className="Dia" key={columna.id}>
-                                <Dia nombre={columna.dia} actividades={columna.actividades} id={columna.id} modificarActividad={modificarActividad}/>
+                                <Dia nombre={columna.dia} actividades={columna.actividades} id={columna.id} modificarActividad={modificarActividad} borrarActividad={borrarActividad} />
                             </div>
                         ))}
                     </div>
