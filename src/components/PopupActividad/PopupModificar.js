@@ -1,28 +1,24 @@
 import React, { useState } from 'react'
-import './PopupCrear.css'
-import DropdownMenu from '../Dropdown/DropdownMenu.js'
+import './PopupModificar.css'
 import SelectorHorarios from '../SelectorHorarios/SelectorHorarios.js';
 
-function PopupCrear(props){
-    const [nombre, setNombre]=useState('');
-    const [dia, setDia] = useState('')
-    
+function PopupModificar(props) {
+    const [nombre, setNombre] = useState('');
+
     const handleSave = () => {
-        props.agregarActividad(nombre, dia)
+        props.modificarActividad(nombre, props.actividadId);
 
         setNombre('');
-        setDia('');
         props.setTrigger(false);
     }
 
     return (props.trigger) ? (
         <div className='fondoPopup'>
             <div className='centroPopup'>
-                <button className='botonCancelar' onClick={()=> props.setTrigger(false)}>X</button>
+                <button className='botonCancelar' onClick={() => props.setTrigger(false)}>X</button>
                 <div className='seteoActividad'>
                     <h1>Actividad:</h1>
                     <input type='text' value={nombre} onChange={(e) => setNombre(e.target.value)} />
-                    <DropdownMenu value={dia} onChange={(e) => setDia(e.target.value)} />
                     <SelectorHorarios />
                     <br />
                     <br />
@@ -34,4 +30,4 @@ function PopupCrear(props){
     ) : ""
 }
 
-export default PopupCrear;
+export default PopupModificar;

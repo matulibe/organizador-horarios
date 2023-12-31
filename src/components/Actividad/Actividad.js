@@ -1,25 +1,28 @@
-import React from "react";
+import React, {useState} from "react";
 import { Draggable } from "react-beautiful-dnd"; 
+import PopupModificar from "../PopupActividad/PopupModificar.js";
 import "./Actividad.css"
 
-export default function Actividad({ actividad, index }) {
+export default function Actividad(props) {
+    const [popup, setPopup] = useState(false);
+
    const handleDragStart = (e) =>{
-        e.dataTransfer.setData("id", actividad.id)
+        e.dataTransfer.setData("id", props.actividad.id)
     }
 
-    const handleClick = (e) =>  {
-        console.log('Click!')
-    }
     return (
-        <Draggable onDragStart={handleDragStart} draggableId={actividad.id.toString()} index={index} key={actividad.id}>
-            {(provided) => (
-                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} onClick={handleClick}>
-                    <div className="actividad">
-                        <h3>{actividad.nombre}</h3>
+        <div>
+            <Draggable onDragStart={handleDragStart} draggableId={props.actividad.id.toString()} index={props.index} key={props.actividad.id}>
+                {(provided) => (
+                    <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} onClick={() => setPopup(true)}>
+                        <div className="actividad">
+                            <h3>{props.actividad.nombre}</h3>
+                        </div>
+                        {provided.placeholder}
                     </div>
-                    {provided.placeholder}
-                </div>
-            )}
-        </Draggable>
+                )}
+            </Draggable>
+            <PopupModificar trigger={popup} setTrigger={setPopup} modificarActividad={props.modificarActividad} actividadId={props.actividad.id}/>
+        </div>
     );
 }

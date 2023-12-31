@@ -73,6 +73,22 @@ export default function Planilla() {
         setActividades(nuevoArray);
     };
 
+    const modificarActividad = (nombre, id) =>{
+        let index = actividades.findIndex(act => act.id === id);
+        let diaAux = actividades.find((act) => act.id === id).dia;
+        const actModificada = {
+            nombre: nombre,
+            dia: diaAux,
+            id: id
+        };
+
+
+        const sinActAux = actividades.filter((act) => act.id !== id);
+        const actividadesActualizadas = [...sinActAux.slice(0, index), actModificada, ...sinActAux.slice(index)];
+
+        setActividades(actividadesActualizadas);
+    }
+
     console.log(actividades)
     return (
         <div>
@@ -84,7 +100,7 @@ export default function Planilla() {
                     <div className="Dias">
                         {columnas.map((columna)=>(
                             <div className="Dia" key={columna.id}>
-                                <Dia nombre={columna.dia} actividades={columna.actividades} id={columna.id} />
+                                <Dia nombre={columna.dia} actividades={columna.actividades} id={columna.id} modificarActividad={modificarActividad}/>
                             </div>
                         ))}
                     </div>
@@ -96,6 +112,7 @@ export default function Planilla() {
                 </div>
             </main>
                 <PopupCrear trigger={popup} setTrigger={setPopup} agregarActividad={agregarActividad} />
+                <p className="beta">Beta 1.0</p>
         </div>
     );
 }

@@ -34,3 +34,9 @@
     justify-content: center;
     align-items: center;
 }
+
+.beta {
+    display: flex;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+}
