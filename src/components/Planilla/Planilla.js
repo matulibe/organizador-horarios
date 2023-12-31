@@ -93,6 +93,19 @@ export default function Planilla() {
         setActividades(actividadesActualizadas);
     }
 
+    const duplicarActividad = (id) => {
+        const aux = actividades.find((act) => act.id === id);
+        const actDuplicada = {
+            nombre: aux.nombre,
+            dia: aux.dia,
+            id: uuidv4()
+        };
+
+        const actividadesActualizadas = [...actividades];
+        actividadesActualizadas.push(actDuplicada);
+        setActividades(actividadesActualizadas);
+    }
+
     /*
      * Recibe un el id de la actividad que no se desea tener mas,
      * y se la elimina del array actividades
@@ -101,6 +114,12 @@ export default function Planilla() {
         const actividadesActualizadas = actividades.filter((act) => act.id !== id);
 
         setActividades(actividadesActualizadas)
+    }
+
+    const funciones = {
+        borrarActividad: borrarActividad,
+        modificarActividad: modificarActividad,
+        duplicarActividad: duplicarActividad
     }
 
     console.log(actividades)
@@ -114,7 +133,7 @@ export default function Planilla() {
                     <div className="Dias">
                         {columnas.map((columna)=>(
                             <div className="Dia" key={columna.id}>
-                                <Dia nombre={columna.dia} actividades={columna.actividades} id={columna.id} modificarActividad={modificarActividad} borrarActividad={borrarActividad} />
+                                <Dia nombre={columna.dia} actividades={columna.actividades} id={columna.id} funciones={funciones} />
                             </div>
                         ))}
                     </div>

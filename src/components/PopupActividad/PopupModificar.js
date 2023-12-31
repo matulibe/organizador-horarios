@@ -6,14 +6,20 @@ function PopupModificar(props) {
     const [nombre, setNombre] = useState('');
 
     const handleSave = () => {
-        props.modificarActividad(nombre, props.actividadId);
+        props.funciones.modificarActividad(nombre, props.actividadId);
 
         setNombre(''); // Vuelvo al estado inicial
+        
         props.setTrigger(false);
     }
 
     const handleDelete= () => {
-        props.borrarActividad(props.actividadId);
+        props.funciones.borrarActividad(props.actividadId);
+        props.setTrigger(false);
+    }
+
+    const handleDuplicate = () =>{
+        props.funciones.duplicarActividad(props.actividadId)
         props.setTrigger(false);
     }
 
@@ -30,6 +36,7 @@ function PopupModificar(props) {
                     <br />
                     <button className='botonGuardar' onClick={handleSave}>Finalizar</button>
                     <button className='BotonEliminar' onClick={handleDelete}>Eliminar</button>
+                    <button className='botonDuplicar' onClick={handleDuplicate}>Duplicar</button>
                 </div>
             </div>
         </div>

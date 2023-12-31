@@ -19,7 +19,7 @@ export default function Actividad(props) {
                     </div>
                 )}
             </Draggable>
-            <PopupModificar trigger={popup} setTrigger={setPopup} modificarActividad={props.modificarActividad} borrarActividad={props.borrarActividad} actividadId={props.actividad.id}/>
+            <PopupModificar trigger={popup} setTrigger={setPopup} funciones={props.funciones} actividadId={props.actividad.id}/>
         </div>
     );
 }

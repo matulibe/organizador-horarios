@@ -11,7 +11,7 @@ export default function Dia(props) {
                 {(provided) => (
                     <div ref={provided.innerRef} {...provided.droppableProps}>
                         {props.actividades.map((actividad, index) => (
-                            <Actividad key={actividad.id} index={index} actividad={actividad} modificarActividad={props.modificarActividad} borrarActividad={props.borrarActividad} />
+                            <Actividad key={actividad.id} index={index} actividad={actividad} funciones={props.funciones} />
                         ))}
                         {provided.placeholder}
                     </div>
