@@ -44,3 +44,38 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+.alertError{
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.botonGuardar{
+    font-size: large;
+    width: auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: rgb(193, 185, 185);
+    margin-left: 10px;
+}
+
+.botonDuplicar {
+    font-size: large;
+    width: auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: rgb(193, 185, 185);
+    margin-left: 10px;
+}
+
+.botonBorrar {
+    font-size: large;
+    width: auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: rgb(193, 185, 185);
+    margin-left: 10px;
+}

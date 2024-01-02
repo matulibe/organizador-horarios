@@ -3,6 +3,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from 'uuid';
 import Dia from "../Dia/Dia";
 import PopupCrear from "../Popup/PopupCrear.js"
+import { Alert } from "@mui/material";
 import {dias, actividades as actividadesIniciales} from "../DataActividades"
 import "./Planilla.css"
 
@@ -10,6 +11,7 @@ export default function Planilla() {
 
     const [actividades, setActividades] = useState(actividadesIniciales);
     const [popup, setPopup] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     /*
      *
@@ -69,6 +71,7 @@ export default function Planilla() {
         nuevoArray.push(nuevaActividad)
 
         setActividades(nuevoArray);
+        setSuccess(true);
     };
 
     /*
@@ -91,6 +94,7 @@ export default function Planilla() {
         const actividadesActualizadas = [...sinActAux.slice(0, index), actModificada, ...sinActAux.slice(index)];
 
         setActividades(actividadesActualizadas);
+        setSuccess(true);
     }
 
     const duplicarActividad = (id) => {
@@ -104,7 +108,9 @@ export default function Planilla() {
         const actividadesActualizadas = [...actividades];
         actividadesActualizadas.push(actDuplicada);
         setActividades(actividadesActualizadas);
+        setSuccess(true);
     }
+
 
     /*
      * Recibe un el id de la actividad que no se desea tener mas,
@@ -116,11 +122,18 @@ export default function Planilla() {
         setActividades(actividadesActualizadas)
     }
 
+
+    const finExito = () =>{
+        setSuccess(false);
+    }
+    setTimeout(finExito, 3000);
+
     const funciones = {
         borrarActividad: borrarActividad,
         modificarActividad: modificarActividad,
-        duplicarActividad: duplicarActividad
+        duplicarActividad: duplicarActividad,
     }
+
 
     console.log(actividades)
     return (
@@ -146,6 +159,9 @@ export default function Planilla() {
             </main>
                 <PopupCrear trigger={popup} setTrigger={setPopup} agregarActividad={agregarActividad} />
                 <p className="beta">Beta 1.0</p>
+            {success && (
+                <Alert className='alertaExito' severity='success' onClose={()=>setSuccess(true)}>Actividad guardada exitosamente!</Alert>
+            )}
         </div>
     );
 }
