@@ -21,17 +21,13 @@ export default function Planilla() {
      * 
      */
     const handleDragEnd = (e) => {
-        const { destination, source, draggableId } = e;
+        const { destination, draggableId } = e;
+
+        const actMovida = actividades.find((act) => act.id === draggableId);
 
         if (!destination) {
             return;
         }
-
-        if (destination.droppableId === source.droppableId) {
-            return;
-        }
-
-        const actMovida = actividades.find((act) => act.id === draggableId);
 
         const str = destination.droppableId;
         actMovida.dia = str[0].toUpperCase() + str.slice(1);
