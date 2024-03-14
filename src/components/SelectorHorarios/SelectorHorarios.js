@@ -4,9 +4,13 @@ import { TimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { Alert } from '@mui/material';
 
-function SelectorHorarios(){
+function SelectorHorarios(props){
     const [hora, setHora]=useState(null);
     const [warning, setWarning] = useState(false);
+
+    if(hora){
+        console.log(hora.getHours(), hora.getMinutes());
+    }
     
     return(
         <div>

@@ -60,7 +60,8 @@ export default function Planilla() {
         const nuevaActividad = {
             nombre: nombre,
             dia: dia,
-            id: uuidv4()
+            id: uuidv4(),
+            color: "#f0f8ff"
         };
 
         const nuevoArray = [...actividades];
@@ -76,13 +77,14 @@ export default function Planilla() {
      * reemplazo.
      */
 
-    const modificarActividad = (nombre, id) =>{
+    const modificarActividad = (nombre, id, color) =>{
         let index = actividades.findIndex(act => act.id === id);
         let diaAux = actividades.find((act) => act.id === id).dia;
         const actModificada = {
             nombre: nombre,
             dia: diaAux,
-            id: id
+            id: id,
+            color: color
         };
 
 
@@ -130,8 +132,8 @@ export default function Planilla() {
         duplicarActividad: duplicarActividad,
     }
 
+    console.log(actividades);
 
-    console.log(actividades)
     return (
         <div>
             <main>

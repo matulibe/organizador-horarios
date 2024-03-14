@@ -2,26 +2,26 @@ import React, { useState } from 'react'
 import './PopupModificar.css'
 import SelectorHorarios from '../SelectorHorarios/SelectorHorarios.js';
 import { Alert } from '@mui/material';
+import {CirclePicker} from 'react-color';
 
 function PopupModificar(props) {
-    const [nombre, setNombre] = useState('');
+    const [nombre, setNombre] = useState(props.nombre);
     const [warning, setWarning] = useState(false);
-
+    const [color, setColor] = useState(props.color);
 
     const handleSave = () => {
 
         if(nombre === ''){
             setWarning(true);
         } else {
-            props.funciones.modificarActividad(nombre, props.actividadId, true);
-            setNombre(''); // Vuelvo al estado inicial
+            props.funciones.modificarActividad(nombre, props.actividadId, color);
             props.setTrigger(false);
             setWarning(false);
         }
     }
 
     const handleCancel = () => {
-        setNombre('');
+
         props.setTrigger(false)
         setWarning(false);
     }
@@ -37,6 +37,10 @@ function PopupModificar(props) {
         setWarning(false);
     }
 
+    const handleColor = (color) =>{
+        setColor(color.hex);
+    }
+
     return (props.trigger) ? (
         <div className='fondoPopup'>
             <div className='centroPopup'>
@@ -46,7 +50,11 @@ function PopupModificar(props) {
                     <input type='text' value={nombre} onChange={(e) => setNombre(e.target.value)} />
                     <p></p>
                     <SelectorHorarios />
-                    <br />
+                    <p></p>
+                    <CirclePicker 
+                    color={color}
+                    onChangeComplete={handleColor}
+                    />
                     <br />
                     <br /> 
                     <button className='botonGuardar' onClick={handleSave}>Finalizar</button>
