@@ -12,6 +12,8 @@ const url = "http://localhost:3001";
 
 export default function Planilla() {
 
+    //logica actividades iniciales desde la bdd
+
     const [actividades, setActividades] = useState(actividadesIniciales);
     const [popup, setPopup] = useState(false);
     const [success, setSuccess] = useState(false);

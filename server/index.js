@@ -7,31 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 
-app.post("/create", (req, res) => {
-    const nombre = req.body.nombre;
-    const dia = req.body.dia;
-    const color = req.body.color;
 
-    db.query('INSERT INTO actividades(nombre, dia, color) VALUES(?,?,?)', [nombre, dia, color]);
-    (err, result)=>{
-        if(err){
-            console.log(err)
-        }else{
-            res.send("Carga exitosa");
-        }
-    }
-});
-
-app.get("/actividades", (req, res)=>{
-    db.query('SELECT * FROM actividades');
-    (err, result) => {
-        if (err) {
-            console.log(err)
-        } else {
-            res.send(result);
-        }
-    }
-});
 
 
 const db = mysql.createConnection({
@@ -41,10 +17,33 @@ const db = mysql.createConnection({
     database: 'proyecto_horarios'
 });
 
-app.post("/create", (req, res)=>{
-
-})
-
-app.listen(3001, ()=>{
+app.listen(3001, () => {
     console.log('Runnning on port:3001');
 });
+
+app.post("/create", (req, res) => {
+    const nombre = req.body.nombre;
+    const dia = req.body.dia;
+    const color = req.body.color;
+
+    db.query('INSERT INTO actividades(nombre, dia, color) VALUES(?,?,?)', [nombre, dia, color],
+    (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send("Carga exitosa");
+        }
+    })
+});
+
+app.get("/actividades", (req, res) => {
+    db.query('SELECT * FROM actividades',
+    (err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(result);
+        }
+    })
+});
+
