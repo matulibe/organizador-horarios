@@ -5,7 +5,10 @@ import Dia from "../Dia/Dia";
 import PopupCrear from "../Popup/PopupCrear.js"
 import { Alert } from "@mui/material";
 import {dias, actividades as actividadesIniciales} from "../DataActividades"
+import Axios from "axios";
 import "./Planilla.css"
+
+const url = "http://localhost:3001";
 
 export default function Planilla() {
 
@@ -65,10 +68,19 @@ export default function Planilla() {
         };
 
         const nuevoArray = [...actividades];
-        nuevoArray.push(nuevaActividad)
+        nuevoArray.push(nuevaActividad);
 
+        const urlCreate = url + "/create"
+
+        Axios.post(urlCreate, {
+            nombre: nuevaActividad.nombre,
+            dia: nuevaActividad.dia,
+            color: nuevaActividad.color
+        }).then(()=>{
+        })
         setActividades(nuevoArray);
         setSuccess(true);
+
     };
 
     /*
